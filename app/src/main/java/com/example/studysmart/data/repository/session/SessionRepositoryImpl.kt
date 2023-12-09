@@ -16,7 +16,7 @@ class SessionRepositoryImpl @Inject constructor(private val sessionDao: SessionD
     override fun getRecentSessionsForSubject(subjectId: Int): Flow<List<Session>> =
         sessionDao.getRecentSessionsForSubject(subjectId = subjectId)
 
-    override fun getTotalSessionsDuration(): Flow<Long> =
+    override fun getTotalSessionsDuration(): Flow<Long?> =
         sessionDao.getTotalSessionsDuration()
 
     override fun getTotalSessionsDurationBySubjectId(subjectId: Int): Flow<Long> =

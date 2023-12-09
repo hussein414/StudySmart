@@ -34,9 +34,6 @@ fun Long?.changeMillisToDateString(): String {
 fun Long.toHours(): Float {
     val hours = this.toFloat() / 3600f
     return "%.2f".format(hours).toFloat()
-
-
-
 }
 
 

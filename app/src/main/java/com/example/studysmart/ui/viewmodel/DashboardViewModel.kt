@@ -35,9 +35,9 @@ class DashboardViewModel @Inject constructor(
     ) { state, subjectCount, goalHours, subjects, totalSessionDuration ->
         state.copy(
             totalSubjectCount = subjectCount,
-            totalGoalStudyHours = goalHours,
+            totalGoalStudyHours =goalHours ?: 1f,
             subjects = subjects,
-            totalStudiedHours = totalSessionDuration.toHours()
+            totalStudiedHours =totalSessionDuration?.toHours() ?: 0f
         )
     }.stateIn(
         scope = viewModelScope,
@@ -72,7 +72,7 @@ class DashboardViewModel @Inject constructor(
             }
 
             DashboardEvent.SaveSubject -> saveSubject()
-            DashboardEvent.DeleteSession ->{}
+            DashboardEvent.DeleteSession -> {}
             is DashboardEvent.OnTaskIsCompleteChange -> {
 
             }
@@ -86,12 +86,12 @@ class DashboardViewModel @Inject constructor(
                 subjectRepository.upsertSubject(
                     subject = Subject(
                         name = state.value.subjectName,
-                        goalHours = state.value.goalStudyHours.toFloatOrNull() ?: 1f,
+                        goalHours = 1f,
                         colors = state.value.subjectCardColors.map { it.toArgb() }
                     )
                 )
             } catch (e: Exception) {
-
+                Log.d("bomb", e.message.toString())
             }
         }
     }

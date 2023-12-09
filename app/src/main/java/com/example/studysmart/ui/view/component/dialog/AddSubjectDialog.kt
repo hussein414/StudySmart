@@ -62,6 +62,8 @@ fun AddSubjectDialog(
         goalHours.toFloat() > 1000f -> "Please set a maximum of 1000 hours."
         else -> null
     }
+    var subjectNameValue by remember { mutableStateOf("") }
+    var goalHoursValue by remember { mutableStateOf("") }
     when {
         isOpen -> {
             AlertDialog(
@@ -93,28 +95,38 @@ fun AddSubjectDialog(
                             }
                         }
                         OutlinedTextField(
-                            value = subjectName,
-                            onValueChange = onSubjectNameChange,
+                            value = subjectNameValue,
+                            onValueChange = { value ->
+                                subjectNameValue = value
+                                onSubjectNameChange(value)
+                            },
                             label = { Text(text = "Subject Name") },
                             singleLine = true,
                             isError = subjectNameError != null && subjectName.isNotBlank(),
-                            supportingText = { Text(text = subjectNameError.orEmpty())}
+                            supportingText = { Text(text = subjectNameError.orEmpty()) }
                         )
                         Spacer(modifier = Modifier.height(10.dp))
                         OutlinedTextField(
-                            value = goalHours,
-                            onValueChange = onSubjectGoalHoursChange,
+                            value = goalHoursValue,
+                            onValueChange = { value ->
+                                goalHoursValue = value
+                                onSubjectGoalHoursChange(value)
+                            },
                             label = { Text(text = "Goal Study Hours") },
                             singleLine = true,
                             isError = goalHoursError != null && goalHours.isNotBlank(),
-                            supportingText = { Text(text = goalHoursError.orEmpty())},
+                            supportingText = { Text(text = goalHoursError.orEmpty()) },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                         )
                     }
                 },
                 confirmButton = {
                     TextButton(
-                        onClick = { onConfirmButtonClick() },
+                        onClick = {
+                            onConfirmButtonClick()
+                            subjectNameValue = ""
+                            goalHoursValue = ""
+                        },
                         enabled = subjectNameError == null && goalHoursError == null
                     ) {
                         Text(text = "Save")

@@ -8,7 +8,7 @@ interface SubjectRepository {
 
     fun getTotalSubjectCount(): Flow<Int>
 
-    fun getTotalGoalHours(): Flow<Float>
+    fun getTotalGoalHours(): Flow<Float?>
 
     fun getSubjectById(subjectId: Int): Subject?
 

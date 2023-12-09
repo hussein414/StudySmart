@@ -13,7 +13,7 @@ class SubjectRepositoryImpl @Inject constructor(private val subjectDao: SubjectD
     override fun getTotalSubjectCount(): Flow<Int> =
         subjectDao.getTotalSubjectCount()
 
-    override fun getTotalGoalHours(): Flow<Float> =
+    override fun getTotalGoalHours(): Flow<Float?> =
         subjectDao.getTotalGoalHours()
 
     override fun getSubjectById(subjectId: Int): Subject? =

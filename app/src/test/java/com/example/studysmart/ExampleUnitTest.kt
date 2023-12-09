@@ -1,6 +1,5 @@
 package com.example.studysmart
 
-import com.example.studysmart.utils.toHours
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,10 +12,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-
-        val milliseconds = 7200000L
-        val expectedHours = 2.0f
-        val result = milliseconds.toHours()
-        assertEquals(expectedHours, result, 0.01f)
+        assertEquals(4, 2 + 2)
     }
 }

@@ -9,7 +9,7 @@ interface SessionRepository {
     suspend fun deleteSession(session: Session)
     fun getAllSessions(): Flow<List<Session>>
     fun getRecentSessionsForSubject(subjectId: Int): Flow<List<Session>>
-    fun getTotalSessionsDuration(): Flow<Long>
+    fun getTotalSessionsDuration(): Flow<Long?>
     fun getTotalSessionsDurationBySubjectId(subjectId: Int): Flow<Long>
     fun deleteSessionsBySubjectId(subjectId: Int)
 
